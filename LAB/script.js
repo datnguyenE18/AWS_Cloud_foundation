@@ -96,4 +96,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.error |
+                throw new Error(errorData.error || 'Failed to submit quote'); }
+            showMessage('Quote submitted successfully!', 'success');
+            quoteForm.reset();
+            loadQuotes(); // Tải lại danh sách báo giá
+        } catch (error) {
+            console.error('Error submitting quote:', error);
+            showMessage(error.message, 'error');
+        }
+    });
+
+    // Tải dữ liệu ban đầu
+    loadServices();
+    loadQuotes();
+});
